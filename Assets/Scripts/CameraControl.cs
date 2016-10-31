@@ -8,14 +8,18 @@ public class CameraControl : MonoBehaviour {
     public float damping;
 
     private float horizontalInput;
-	void Start () {
-	
+
+    private GameController gControl;
+	void Start ()
+    {
+        gControl = FindObjectOfType<GameController>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        TriToolHub.Rotate(gameObject, TriToolHub.XYZ.Y, horizontalInput * Time.deltaTime*rotationSpeed, true, Space.World);
+        //horizontalInput = Input.GetAxis("Horizontal");
+        if(gControl.currentGameState==GameController.GameState.Playing)
+            TriToolHub.Rotate(gameObject, TriToolHub.XYZ.Y, 1* Time.deltaTime*rotationSpeed, true, Space.World);
 	}
 }
